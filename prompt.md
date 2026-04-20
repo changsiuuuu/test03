@@ -1,3 +1,4 @@
+지금의 main.py는 다음과 같아
 # test03/main.py
 
 from fastapi import Depends, FastAPI, Query, Request, Form
@@ -63,16 +64,7 @@ def postNew(writer: str = Form(...), title: str = Form(...), content: str = Form
     #특정 경로로 다시 응답하도록
     return RedirectResponse("/post", status_code=302)
 
-@app.get("/post/delete")
-def postDelete(num: int = Query(...), db: Session = Depends(get_db)):
-    # DB에서 글을 삭제하기 위한 sql 문 준비
-    query = text("""
-        DELETE FROM post
-        WHERE num = :num
-    """)
-    # SQL 실행
-    db.execute(query, {"num": num})
-    db.commit()
+지금 로우쿼리를 쓰면서 게시물을 보고, 새글을 등록하고 하고 있는데
+이 코딩 스타일을 그대로 따르면서
+게시물을 삭제하는 기능도 만들어줘.
 
-    # 삭제 후 글 목록 페이지로 리다이렉트
-    return RedirectResponse("/post", status_code=302)
