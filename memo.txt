@@ -1,0 +1,11 @@
+1. 파이썬 가상환경 먼저
+python -m venv venv
+
+2. 가상환경 활성화
+.\venv\Scripts\activate
+
+3. 필요한 패키지 설치...
+pip install fastapi uvicorn sqlalchemy psycopg2-binary python-jose jinja2 python-multipart
+
+작성 후 시작할려면
+uvicorn main:app --reload
