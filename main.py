@@ -57,6 +57,8 @@ def postNew(writer: str = Form(...), title: str = Form(...), content: str = Form
         (writer, title, content)
         VALUES(:writer, :title, :content)
         """)
+    # query 문을 실행하면서 같이 전달한 dict의 키값과 :writer, :title, :content 동일한 위치
+    # 값이 바인딩되서 실행된다.
     db.execute(query, {"writer":writer, "title":title, "content":content})
     db.commit()
 
