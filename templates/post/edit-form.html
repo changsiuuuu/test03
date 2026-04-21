@@ -12,7 +12,7 @@
         
         <div>
             <label>작성자</label>
-            <input type="text" name="writer" value="{{ post.writer }}">
+            <input type="text" name="writer" value="{{ post.writer }}" readonly>
         </div>
         <div>
             <label>제목</label>
@@ -20,10 +20,12 @@
         </div>
         <div>
             <label>내용</label>
+            <br>
             <textarea name="content" rows="5">{{ post.content }}</textarea>
         </div>
         <button type="submit">수정 완료</button>
-        <a href="/post">취소</a>
+        <button type="reset">취소</button>
+        <a href="/post">돌아가기</a>
     </form>
 </body>
 </html>
