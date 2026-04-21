@@ -16,7 +16,8 @@
                 <th>제목</th>
                 <th>내용</th>
                 <th>등록일</th>
-                <th>수정/삭제</th>
+                <th>수정</th>
+                <th>삭제</th>
             </tr>
         </thead>
         <tbody>
@@ -29,10 +30,8 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.created_at.strftime('%Y-%m-%d %H:%M:%S') if post.created_at else '' }}</td>
-                <td>
-                    <a href="/post/edit?num={{post.num}}">수정</a>
-                    <a href="/post/delete?num={{post.num}}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-                </td>
+                <td><a href="/post/edit?num={{post.num}}">수정</a></td>
+                <td><a href="/post/delete?num={{post.num}}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a></td>
             </tr>
             {% endfor %}
         </tbody>
