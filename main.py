@@ -100,6 +100,7 @@ def postEditForm(request: Request, num: int = Query(...), db: Session = Depends(
 
 @app.post("/post/edit")
 def postEdit(
+    request: Request,
     num: int = Form(...),
     writer: str = Form(...),
     title: str = Form(...),
@@ -115,5 +116,12 @@ def postEdit(
     db.execute(query, {"num": num, "writer": writer, "title": title, "content": content})
     db.commit()
 
-    return RedirectResponse("/post", status_code=302)
+    return templates.TemplateResponse(
+        request=request, 
+        name="post/alert.html",
+        context={
+            "msg":"글 정보를 수정 했습니다!",
+            "url":"/post"
+        }
+    )
 
