@@ -28,9 +28,10 @@
                 <td>{{ post.writer }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content }}</td>
-                <td>{{ post.created_at }}</td>
+                <td>{{ post.created_at.strftime('%Y-%m-%d %H:%M:%S') if post.created_at else '' }}</td>
                 <td>
-            <a href="/post/delete?num={{post.num}}">삭제</a>
+                    <a href="/post/edit?num={{post.num}}">수정</a>
+                    <a href="/post/delete?num={{post.num}}">삭제</a>
                 </td>
             </tr>
             {% endfor %}

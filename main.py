@@ -76,3 +76,36 @@ def postDelete(num: int = Query(...), db: Session = Depends(get_db)):
 
     # 삭제 후 글 목록 페이지로 리다이렉트
     return RedirectResponse("/post", status_code=302)
+
+@app.get("/post/edit", response_class=HTMLResponse)
+def postEditForm(request: Request, num: int = Query(...), db: Session = Depends(get_db)):
+    # 수정을 위해 기존 데이터를 가져옴
+    query = text("SELECT num, writer, title, content FROM post WHERE num = :num")
+    result = db.execute(query, {"num": num})
+    post = result.fetchone()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="post/edit-form.html",
+        context={"post": post}
+    )
+
+@app.post("/post/edit")
+def postEdit(
+    num: int = Form(...),
+    writer: str = Form(...),
+    title: str = Form(...),
+    content: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    # DB 내용을 업데이트하는 SQL문
+    query = text("""
+        UPDATE post
+        SET writer = :writer, title = :title, content = :content
+        WHERE num = :num
+    """)
+    db.execute(query, {"num": num, "writer": writer, "title": title, "content": content})
+    db.commit()
+
+    return RedirectResponse("/post", status_code=302)
+
